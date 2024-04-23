@@ -1,0 +1,34 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Form</title>
+</head>
+<body>
+    <form id="dataForm">
+        <label for="dataInput">Enter Data:</label>
+        <input type="text" id="dataInput" name="dataInput" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevents the default form submission
+
+            const formData = new FormData(event.target);
+            const inputData = formData.get('dataInput');
+
+            // Send data to the server
+            fetch('/submit-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ inputData }),
+            });
+        });
+    </script>
+</body>
+</html>
